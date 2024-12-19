@@ -4,8 +4,8 @@
   {
     int port = 5000;
     string[] usernames = [];
-    string[]= passwords = [];
-    string[]= ids[];
+    string[] passwords = [];
+    string[] ids=[];
     var server = new Server(port);
 
     Console.WriteLine("The server is running");
@@ -65,7 +65,7 @@
             int i = 0;
             while (ids[i] != UserID)
             {
-              i++
+              i++;
             }
             string username = usernames[i];
             response.Send(username);
