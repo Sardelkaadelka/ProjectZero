@@ -3,6 +3,7 @@
   static void Main()
   {
     int port = 5000;
+     int userindex=-1;
     string[] usernames = [];
     string[] passwords = [];
     string[] ids=[];
@@ -55,6 +56,8 @@
               {
                 FoundUser = true;
                 UserID = ids[i];
+                userindex=i;
+                
               }
             }
             response.Send((FoundUser, UserID));

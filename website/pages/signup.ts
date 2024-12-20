@@ -10,5 +10,5 @@ SignUpb.onclick = function () {
     location.href = "index.html";
 }
 alreadyhaveacc.onclick = function () {
-    location.href="login.html"
+    location.href="index2.html"
 }
