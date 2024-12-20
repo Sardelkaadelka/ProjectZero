@@ -51,7 +51,7 @@
             string UserID = "";
             for (int i = 0; i < usernames.Length; i++)
             {
-              if (username == usernames[i] && password = passwords[i])
+              if (username == usernames[i] && password == passwords[i])
               {
                 FoundUser = true;
                 UserID = ids[i];
