@@ -15,6 +15,6 @@ background-color: pink;
     border: none;
     height: 45px;
 }
-.img{
-    border-radius: 40px;
+.picbut{
+    display: table-row;
 }

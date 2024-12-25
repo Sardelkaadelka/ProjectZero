@@ -40,37 +40,58 @@
           if (request.Path == "signup")
           {
             (string username, string password) = request.GetBody<(string, string)>();
+            string userId = Guid.NewGuid().ToString();
+
             usernames = [.. usernames, username];
             passwords = [.. passwords, password];
-            ids = [.. ids, Guid.NewGuid().ToString()];
+            ids = [.. ids, userId];
             Console.WriteLine(username + "," + password);
+
+            response.Send(userId);
           }
           else if (request.Path == "login")
           {
             (string username, string password) = request.GetBody<(string, string)>();
             bool FoundUser = false;
-            string UserID = "";
-            for (int i = 0; i < usernames.Length; i++)
+            string?userId = null;
+            for (int i = 0; i < ids.Length; i++)
             {
               if (username == usernames[i] && password == passwords[i])
               {
                 FoundUser = true;
-                UserID = ids[i];
+                userId = ids[i];
                 userindex=i;
                 
               }
             }
-            response.Send((FoundUser, UserID));
+            response.Send((FoundUser, userId));
+          }
+          else if (request.Path == "FoundUser")
+          {
+            string userId = request.GetBody<string>();
+
+            bool FoundUser = false;
+            for (int i = 0; i < ids.Length; i++)
+            {
+              if (userId == ids[i])
+              {
+                FoundUser = true;
+              }
+            }
+
+            response.Send(FoundUser);
           }
           else if (request.Path == "GetUserName")
           {
-            string UserID = request.GetBody<string>();
-            int i = 0;
-            while (ids[i] != UserID)
+            string userId = request.GetBody<string>();
+            string username = "";
+            for (int i = 0; i < ids.Length; i++)
             {
-              i++;
+              if (ids[i] == userId)
+              {
+                username = usernames[i];
+              }
             }
-            string username = usernames[i];
             response.Send(username);
           }
           else
