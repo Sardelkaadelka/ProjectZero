@@ -6,6 +6,7 @@ let userDiv = document.querySelector("#userDiv") as HTMLDivElement;
 let usernameDiv = document.querySelector("#usernameDiv") as HTMLDivElement;
 let red = document.getElementById("red")!;
 let bordo = document.getElementById("bordo")!;
+let addToCartButtons = document.querySelector(".add-to-cart");
 
 
 let userId = localStorage.getItem("UserID");
@@ -26,22 +27,28 @@ if (FoundUser)
   
     let username = await send("GetUserName", userId)
     usernameDiv.innerText = "Logged In as " + username;
- }
+}
 
-b.onclick=function(){
+
+b.onclick = function ()
+{
  location.href="index2.html";
 }
-b2.onclick = function () {
+b2.onclick = function ()
+{
     location.href = "signup.html";
 
     
 }
-Cartb.onclick = function () {
+Cartb.onclick = function ()
+{
   location.href = "Wishlist.html";
 }
-red.onclick = function () {
+red.onclick = function ()
+{
   location.href = "red.html";
 }
-bordo.onclick = function () {
+bordo.onclick = function ()
+{
   location.href = "bordo.html";
 }
