@@ -4,7 +4,6 @@
   {
     User[] users = [];
     int port = 5000;
-     int userindex=-1;
     
     var server = new Server(port);
 
@@ -58,7 +57,6 @@
               {
                 FoundUser = true;
                 userId = users[i].id;
-                userindex=i;
                 
               }
             }
@@ -101,7 +99,34 @@
               }
             }
             myUser.favorites[picId] = true;
+
          }
+         else if(request.Path=="removefromcart"){
+            var (userId, picId) = request.GetBody<(string, int)>();
+            User myUser = default!;
+            for (int i = 0; i < users.Length; i++)
+            {
+              if (users[i].id == userId)
+              {
+                myUser = users[i];
+              }
+            }
+            myUser.favorites[picId] = false;
+
+          }
+          else if (request.Path == "getFavorites")
+          {
+            string userId = request.GetBody<string>();
+            User myUser = default!;
+            for (int i = 0; i < users.Length; i++)
+            {
+              if (users[i].id == userId)
+              {
+                myUser = users[i];
+              }
+            }
+            response.Send(myUser.favorites);
+          }
           else
           {
             response.SetStatusCode(405);
