@@ -24,14 +24,15 @@ background-color: pink;
     text-align: center;
     font-size: 16px;
     border-radius: 40px;
-    outline: none;
     border: none;
     height: 45px;
+    
 }
 .item{
-    width: 500px;
+    width: 550px;
     background: white;
     border-radius: 40px;
+    
 }
 * {
     color: rgb(210, 80, 111);
