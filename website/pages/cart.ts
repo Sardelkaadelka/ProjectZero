@@ -1,8 +1,9 @@
  import { send } from "../utilities";
-let userId = localStorage.getItem("userId");
+let UserID = localStorage.getItem("UserID");
 let pics = document.querySelectorAll(".pic") as NodeListOf<HTMLImageElement>;
+console.log(UserID);
 
-let favorites = await send("getFavorites", userId) as boolean[];
+let favorites = await send("getFavorites", UserID) as boolean[];
 
 for (let i = 0; i < favorites.length; i++) { 
     if (favorites[i]) { 

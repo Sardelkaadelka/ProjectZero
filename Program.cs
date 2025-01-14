@@ -49,18 +49,18 @@
           {
             (string username, string password) = request.GetBody<(string, string)>();
             bool FoundUser = false;
-            string?userId = null;
+            string?UserID = null;
             for (int i = 0; i < users.Length; i++)
             {
               if (username == users[i].username
                && password == users[i].password)
               {
                 FoundUser = true;
-                userId = users[i].id;
+                UserID= users[i].id;
                 
               }
             }
-            response.Send((FoundUser, userId));
+            response.Send((FoundUser, UserID));
           }
           else if (request.Path == "FoundUser")
           {
@@ -91,38 +91,38 @@
             response.Send(username);
           }
          else if(request.Path=="addtocart"){
-            var (userId, picId) = request.GetBody<(string, int)>();
+            (int i, string userId) = request.GetBody<(int, string)>();
             User myUser = default!;
-            for (int i=0; i<users.Length;i++){
-              if (users[i].id==userId){
-                myUser = users[i];
+            for (int j=0; j<users.Length;j++){
+              if (users[j].id==userId){
+                myUser = users[j];
               }
             }
-            myUser.favorites[picId] = true;
+            myUser.favorites[i] = true;
 
          }
          else if(request.Path=="removefromcart"){
-            var (userId, picId) = request.GetBody<(string, int)>();
+           (int i, string userId) = request.GetBody<(int, string)>();
             User myUser = default!;
-            for (int i = 0; i < users.Length; i++)
+            for (int j = 0; j < users.Length; j++)
             {
-              if (users[i].id == userId)
+              if (users[j].id == userId)
               {
                 myUser = users[i];
               }
             }
-            myUser.favorites[picId] = false;
+            myUser.favorites[i] = false;
 
           }
           else if (request.Path == "getFavorites")
           {
             string userId = request.GetBody<string>();
             User myUser = default!;
-            for (int i = 0; i < users.Length; i++)
+            for (int j = 0; j < users.Length; j++)
             {
-              if (users[i].id == userId)
+              if (users[j].id == userId)
               {
-                myUser = users[i];
+                myUser = users[j];
               }
             }
             response.Send(myUser.favorites);
@@ -141,7 +141,9 @@
       response.Close();
     }
   }
-  class User{
+  
+}
+class User{
     public string username;
     public string password;
     public string id;
@@ -151,8 +153,8 @@
     public User(string username,string password){
       this.username = username;
       this.password = password;
-      id = new Guid().ToString();
+      id = Guid.NewGuid().ToString();
       favorites = [false,false,false];
     }
-      }
+      
 }

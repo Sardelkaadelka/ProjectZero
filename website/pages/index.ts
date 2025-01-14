@@ -4,26 +4,25 @@ let b = document.getElementById("b")!;
 let b2 = document.getElementById("b2")!;
 let userDiv = document.querySelector("#userDiv") as HTMLDivElement;
 let usernameDiv = document.querySelector("#usernameDiv") as HTMLDivElement;
-let red = document.getElementById("red")!;
-let bordo = document.getElementById("bordo")!;
+
 let addToCartButtons = document.querySelectorAll(".add-to-cart") as NodeListOf<HTMLButtonElement>;
 
-// let picId = Number(query.get("picId"));
-let userId = localStorage.getItem("UserID");
+
+let UserID = localStorage.getItem("UserID");
 
 let FoundUser = false;
-if (userId != null) {
-  FoundUser = await send("FoundUser", userId) as boolean;
+if ( UserID!= null) {
+  FoundUser = await send("FoundUser", UserID) as boolean;
 }
 
 console.log(FoundUser);
-console.log(userId);
+console.log(UserID);
 
 if (FoundUser) {
 
   userDiv.style.display = "block";
 
-  let username = await send("GetUserName", userId)
+  let username = await send("GetUserName", UserID)
   usernameDiv.innerText = "Logged In as " + username;
 }
 
@@ -39,15 +38,9 @@ b2.onclick = function () {
 Cartb.onclick = function () {
   location.href = "Wishlist.html";
 }
-red.onclick = function () {
-  location.href = "red.html";
-}
-bordo.onclick = function () {
-  location.href = "bordo.html";
-}
 for (let i = 0; i < 3; i++) {
   addToCartButtons[i].onclick = function () {
     if (addToCartButtons)
-      send("addtocart", [userId, i])
+      send("addtocart", [UserID, i])
   }
 }
