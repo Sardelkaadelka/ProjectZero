@@ -64,12 +64,12 @@
           }
           else if (request.Path == "FoundUser")
           {
-            string userId = request.GetBody<string>();
+            string UserID = request.GetBody<string>();
 
             bool FoundUser = false;
             for (int i = 0; i < users.Length; i++)
             {
-              if (userId == users[i].id)
+              if (UserID == users[i].id)
               {
                 FoundUser = true;
               }
@@ -79,11 +79,11 @@
           }
           else if (request.Path == "GetUserName")
           {
-            string userId = request.GetBody<string>();
+            string UserID = request.GetBody<string>();
             string username = "";
             for (int i = 0; i < users.Length; i++)
             {
-              if (users[i].id == userId)
+              if (users[i].id == UserID)
               {
                 username = users[i].username;
               }
@@ -91,10 +91,10 @@
             response.Send(username);
           }
          else if(request.Path=="addtocart"){
-            (int i, string userId) = request.GetBody<(int, string)>();
+            (int i, string UserID) = request.GetBody<(int, string)>();
             User myUser = default!;
             for (int j=0; j<users.Length;j++){
-              if (users[j].id==userId){
+              if (users[j].id==UserID){
                 myUser = users[j];
               }
             }
@@ -102,11 +102,11 @@
 
          }
          else if(request.Path=="removefromcart"){
-           (int i, string userId) = request.GetBody<(int, string)>();
+           (int i, string UserID) = request.GetBody<(int, string)>();
             User myUser = default!;
             for (int j = 0; j < users.Length; j++)
             {
-              if (users[j].id == userId)
+              if (users[j].id == UserID)
               {
                 myUser = users[i];
               }
@@ -116,11 +116,11 @@
           }
           else if (request.Path == "getFavorites")
           {
-            string userId = request.GetBody<string>();
+            string UserID = request.GetBody<string>();
             User myUser = default!;
             for (int j = 0; j < users.Length; j++)
             {
-              if (users[j].id == userId)
+              if (users[j].id == UserID)
               {
                 myUser = users[j];
               }

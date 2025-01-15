@@ -48,6 +48,6 @@ Cartb.onclick = function () {
 for (let i = 0; i < 3; i++) {
   addToCartButtons[i].onclick = function () {
     if (addToCartButtons)
-      send("addtocart", [UserID, i])
+      send("addtocart", [i, UserID])
   }
 }
